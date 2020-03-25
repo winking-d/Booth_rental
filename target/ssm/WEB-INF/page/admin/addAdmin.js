@@ -1,6 +1,5 @@
-var $;
-var $form;
-var form;
+let $;
+let form;
 layui.config({
 	base : "js/"
 }).use(['form','layer','jquery','laydate'],function(){
