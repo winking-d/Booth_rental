@@ -42,6 +42,7 @@
 				<input type="text" name="eMail" id="eMail" class="layui-input userName"
 					lay-verify="email" placeholder="请输入邮箱" value="${user.eMail }">
 			</div>
+		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">昵称</label>
 			<div class="layui-input-block">

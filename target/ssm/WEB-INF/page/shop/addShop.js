@@ -12,7 +12,7 @@ layui.config({
     $("#shopNumber").blur(function(){
         $.ajax({
             type: "post",
-            url: ctx+"/user/checkShopByNumber?number="+$("#shopNumber").val(),
+            url: ctx+"/shop/checkShopByNumber?number="+$("#shopNumber").val(),
             success:function(data){
                 if(data.code!=0){
                     top.layer.msg(data.msg);
@@ -22,7 +22,7 @@ layui.config({
             }
         });
     });
-
+    
     form.on("submit(addShop)",function(data){
         //弹出loading
         var index = top.layer.msg('数据提交中，请稍候',{icon: 16,time:false,shade:0.8});
@@ -50,9 +50,9 @@ layui.config({
             }else{
                 top.layer.msg(msg,{icon: 5});
             }
-            //layer.closeAll("iframe");
-            //刷新父页面
-            //parent.location.reload();
+            layer.closeAll("iframe");
+            刷新父页面
+            parent.location.reload();
         },2000);
         return false;
     })

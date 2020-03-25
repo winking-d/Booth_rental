@@ -58,9 +58,9 @@
     <div class="layui-form-item">
         <label class="layui-form-label">商铺类型</label>
         <div class="layui-input-block">
-            <select id="type" name="shopType">
+            <select id="shopType" name="shopType">
                 <option value="">请选择商铺类型</option>
-                <option value="01">服饰零售</option>
+                <option value="01">服饰</option>
                 <option value="02">餐饮</option>
                 <option value="03">影院</option>
                 <option value="04">KTV</option>

@@ -1,9 +1,8 @@
 package com.irs.controller;
 
 import com.irs.annotation.SysLog;
+import com.irs.pojo.ShopSearch;
 import com.irs.pojo.TbShops;
-import com.irs.pojo.TbUsers;
-import com.irs.pojo.UserSearch;
 import com.irs.service.ShopService;
 import com.irs.service.UserService;
 import com.irs.util.ResultUtil;
@@ -25,64 +24,79 @@ public class ShopManagementController {
 
     @RequestMapping("addShop")
     @RequiresPermissions("user:user:save")
-    public String shopAdd(){
+    public String shopAdd() {
         return "page/shop/addShop";
     }
 
     @RequestMapping("shopList")
     @RequiresPermissions("shop:shop:list")
-    public String userList(){
+    public String shopList() {
         return "page/shop/shopList";
     }
 
     @RequestMapping("checkShopByNumber")
     @ResponseBody
-    public  ResultUtil checkShopNumber(String number){
+    public ResultUtil checkShopNumber(String number) {
         TbShops shops = shopServiceImpl.selShopByNumber(number);
-        if(shops!=null){
-            return  new ResultUtil(500,"商铺已存在，请重新填写！");
+        if (shops != null) {
+            return new ResultUtil(500, "商铺已存在，请重新填写！");
         }
         return new ResultUtil(0);
     }
 
-    @SysLog(value="添加商铺")
+    /**
+     * 添加商铺
+     *
+     * @param shops
+     * @return
+     */
+    @SysLog(value = "添加商铺")
     @RequestMapping("insShop")
     @RequiresPermissions("shop:shop:save")
     @ResponseBody
-    public ResultUtil insUser(TbShops shops){
+    public ResultUtil insShop(TbShops shops) {
         //防止浏览器提交
-        TbShops s1= shopServiceImpl.selShopByNumber(shops.getShopNumber());
-        if(s1!=null){
-            return new ResultUtil(500,"商铺已存在，请重新填写！");
+        TbShops s1 = shopServiceImpl.selShopByNumber(shops.getShopNumber());
+        if (s1 != null) {
+            return new ResultUtil(500, "商铺已存在，请重新填写！");
         }
         try {
             shopServiceImpl.insShopService(shops);
             return ResultUtil.ok();
         } catch (Exception e) {
             //e.printStackTrace();
-            return new ResultUtil(502,"系统发生错误，请再次尝试！");
+            return new ResultUtil(502, "系统发生错误，请再次尝试！");
         }
     }
 
-    @RequestMapping("getUserList")
-    @RequiresPermissions("user:user:list")
+    /**
+     * 查找商铺
+     *
+     * @param page
+     * @param limit
+     * @param search
+     * @return
+     */
+    @RequestMapping("getShopList")
+    @RequiresPermissions("shop:shop:list")
     @ResponseBody
-    public ResultUtil getUserList(Integer page, Integer limit, UserSearch search){
-        return userServiceImpl.selUsers(page,limit,search);
+    public ResultUtil getShopList(Integer page, Integer limit, ShopSearch search) {
+        return shopServiceImpl.selShops(page, limit, search);
     }
 
     /**
      * 批量删除用户
-     * @param userStr
+     *
+     * @param shopStr
      * @return
      */
-    @SysLog(value="批量删除用户")
-    @RequestMapping("delUsers/{userStr}")
-    @RequiresPermissions("user:user:delete")
+    @SysLog(value = "批量删除用户")
+    @RequestMapping("delShops/{shopStr}")
+    @RequiresPermissions("shop:shop:delete")
     @ResponseBody
-    public ResultUtil delUsers(@PathVariable("userStr")String userStr){
+    public ResultUtil delUsers(@PathVariable(value = "shopStr") String shopStr) {
         try {
-            userServiceImpl.delUsersService(userStr);
+            shopServiceImpl.delShopsService(shopStr);
             return ResultUtil.ok();
         } catch (Exception e) {
             e.printStackTrace();
@@ -91,17 +105,18 @@ public class ShopManagementController {
     }
 
     /**
-     * 根据ID删除用户
-     * @param uid
+     * 根据ID删除商铺
+     *
+     * @param id
      * @return
      */
-    @SysLog(value="根据ID删除用户")
-    @RequestMapping("delUserByUid/{uid}")
-    @RequiresPermissions("user:user:delete")
+    @SysLog(value = "根据ID删除商铺")
+    @RequestMapping("delShopById/{id}")
+    @RequiresPermissions("shop:shop:delete")
     @ResponseBody
-    public ResultUtil delUserByUid(@PathVariable("uid")String uid){
+    public ResultUtil delShopByid(@PathVariable(value = "id") String id) {
         try {
-            userServiceImpl.delUserByUid(uid);;
+            shopServiceImpl.delShopByid(Integer.parseInt(id));
             return ResultUtil.ok();
         } catch (Exception e) {
             e.printStackTrace();
@@ -109,26 +124,34 @@ public class ShopManagementController {
         }
     }
 
-    @RequestMapping("editUser/{uid}")
-    @RequiresPermissions("user:user:save")
-    public String editUser(@PathVariable("uid")String uid, Model model){
-        TbUsers user=userServiceImpl.selUserByUid(Long.parseLong(uid));
-        model.addAttribute("user", user);
-        return "page/user/editUser";
+    /**
+     * 根据ID查找商铺
+     *
+     * @param id
+     * @param model
+     * @return
+     */
+    @RequestMapping("editShop/{id}")
+    @RequiresPermissions("shop:shop:save")
+    public String editUser(@PathVariable(value = "id") String id, Model model) {
+        TbShops shop = shopServiceImpl.selShopByid(Integer.parseInt(id));
+        model.addAttribute("shop", shop);
+        return "page/shop/editShop";
     }
 
     /**
      * 更新用户信息
-     * @param user
+     *
+     * @param shop
      * @return
      */
-    @SysLog(value="更新用户信息")
-    @RequestMapping("updUser")
-    @RequiresPermissions("user:user:update")
+    @SysLog(value = "更新商铺信息")
+    @RequestMapping("updShop")
+    @RequiresPermissions("shop:shop:update")
     @ResponseBody
-    public ResultUtil updUser(TbUsers user){
+    public ResultUtil updShop(TbShops shop) {
         try {
-            userServiceImpl.updUserService(user);
+            shopServiceImpl.updShopService(shop);
             return ResultUtil.ok();
         } catch (Exception e) {
             e.printStackTrace();
