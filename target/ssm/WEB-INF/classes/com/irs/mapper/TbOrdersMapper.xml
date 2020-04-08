@@ -8,6 +8,8 @@
     <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
     <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
     <result column="amount" jdbcType="DOUBLE" property="amount" />
+    <result column="pay_time" jdbcType="TIMESTAMP" property="payTime" />
+    <result column="pay_rent" jdbcType="DOUBLE" property="payRent" />
     <result column="order_state" jdbcType="VARCHAR" property="orderState" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -69,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    uuid, user_id, shop_number, start_time, end_time, amount, order_state
+    uuid, user_id, shop_number, start_time, end_time, amount, pay_time, pay_rent, order_state
   </sql>
   <select id="selectByExample" parameterType="com.irs.pojo.TbOrdersExample" resultMap="BaseResultMap">
     select
@@ -86,7 +88,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
+    select 
     <include refid="Base_Column_List" />
     from tb_orders
     where uuid = #{uuid,jdbcType=INTEGER}
@@ -102,12 +104,14 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.irs.pojo.TbOrders">
-    insert into tb_orders (uuid, user_id, shop_number,
-      start_time, end_time, amount,
-      order_state)
-    values (#{uuid,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{shopNumber,jdbcType=VARCHAR},
-      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{amount,jdbcType=DOUBLE},
-      #{orderState,jdbcType=VARCHAR})
+    insert into tb_orders (uuid, user_id, shop_number, 
+      start_time, end_time, amount, 
+      pay_time, pay_rent, order_state
+      )
+    values (#{uuid,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{shopNumber,jdbcType=VARCHAR}, 
+      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{amount,jdbcType=DOUBLE}, 
+      #{payTime,jdbcType=TIMESTAMP}, #{payRent,jdbcType=DOUBLE}, #{orderState,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.irs.pojo.TbOrders">
     insert into tb_orders
@@ -129,6 +133,12 @@
       </if>
       <if test="amount != null">
         amount,
+      </if>
+      <if test="payTime != null">
+        pay_time,
+      </if>
+      <if test="payRent != null">
+        pay_rent,
       </if>
       <if test="orderState != null">
         order_state,
@@ -152,6 +162,12 @@
       </if>
       <if test="amount != null">
         #{amount,jdbcType=DOUBLE},
+      </if>
+      <if test="payTime != null">
+        #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payRent != null">
+        #{payRent,jdbcType=DOUBLE},
       </if>
       <if test="orderState != null">
         #{orderState,jdbcType=VARCHAR},
@@ -185,6 +201,12 @@
       <if test="record.amount != null">
         amount = #{record.amount,jdbcType=DOUBLE},
       </if>
+      <if test="record.payTime != null">
+        pay_time = #{record.payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.payRent != null">
+        pay_rent = #{record.payRent,jdbcType=DOUBLE},
+      </if>
       <if test="record.orderState != null">
         order_state = #{record.orderState,jdbcType=VARCHAR},
       </if>
@@ -201,6 +223,8 @@
       start_time = #{record.startTime,jdbcType=TIMESTAMP},
       end_time = #{record.endTime,jdbcType=TIMESTAMP},
       amount = #{record.amount,jdbcType=DOUBLE},
+      pay_time = #{record.payTime,jdbcType=TIMESTAMP},
+      pay_rent = #{record.payRent,jdbcType=DOUBLE},
       order_state = #{record.orderState,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -224,6 +248,12 @@
       <if test="amount != null">
         amount = #{amount,jdbcType=DOUBLE},
       </if>
+      <if test="payTime != null">
+        pay_time = #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payRent != null">
+        pay_rent = #{payRent,jdbcType=DOUBLE},
+      </if>
       <if test="orderState != null">
         order_state = #{orderState,jdbcType=VARCHAR},
       </if>
@@ -237,6 +267,8 @@
       start_time = #{startTime,jdbcType=TIMESTAMP},
       end_time = #{endTime,jdbcType=TIMESTAMP},
       amount = #{amount,jdbcType=DOUBLE},
+      pay_time = #{payTime,jdbcType=TIMESTAMP},
+      pay_rent = #{payRent,jdbcType=DOUBLE},
       order_state = #{orderState,jdbcType=VARCHAR}
     where uuid = #{uuid,jdbcType=INTEGER}
   </update>
