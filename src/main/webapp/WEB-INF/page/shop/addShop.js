@@ -51,7 +51,7 @@ layui.config({
                 top.layer.msg(msg,{icon: 5});
             }
             layer.closeAll("iframe");
-            刷新父页面
+            // 刷新父页面
             parent.location.reload();
         },2000);
         return false;

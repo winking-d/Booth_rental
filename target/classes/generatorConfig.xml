@@ -52,7 +52,7 @@
 		<table schema="" tableName="tb_roles"></table>
 		<table schema="" tableName="tb_users"></table> -->
 
-		<table schema="" tableName="tb_shops"></table>
+<!--		<table schema="" tableName="tb_shops"></table>-->
 		<table schema="" tableName="tb_orders"></table>
 	</context>
 </generatorConfiguration>

@@ -63,7 +63,7 @@
                 <option value="01">服饰</option>
                 <option value="02">餐饮</option>
                 <option value="03">影院</option>
-                <option value="04">KTV</option>
+                <option value="04">电玩</option>
                 <option value="05">超市</option>
             </select>
         </div>

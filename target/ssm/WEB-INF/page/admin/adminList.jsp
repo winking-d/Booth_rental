@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>管理员列表</title>
+<title>用户列表</title>
 <meta name="renderer" content="webkit">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport"
@@ -32,7 +32,7 @@
 		<shiro:hasPermission name="sys:admin:save">
 			<div class="layui-inline">
 				<a class="layui-btn layui-btn-normal adminAdd_btn"><i
-					class="layui-icon">&#xe608;</i> 添加管理员</a>
+					class="layui-icon">&#xe608;</i> 添加用户</a>
 			</div>
 		</shiro:hasPermission>
 		<shiro:hasPermission name="sys:admin:delete">

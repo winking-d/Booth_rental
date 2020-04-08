@@ -4,7 +4,6 @@ import com.irs.annotation.SysLog;
 import com.irs.pojo.ShopSearch;
 import com.irs.pojo.TbShops;
 import com.irs.service.ShopService;
-import com.irs.service.UserService;
 import com.irs.util.ResultUtil;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +17,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("shop/")
 public class ShopManagementController {
     @Autowired
-    private UserService userServiceImpl;
-    @Autowired
     private ShopService shopServiceImpl;
 
     @RequestMapping("addShop")
-    @RequiresPermissions("user:user:save")
+    @RequiresPermissions("shop:shop:save")
     public String shopAdd() {
         return "page/shop/addShop";
     }
@@ -94,7 +91,7 @@ public class ShopManagementController {
     @RequestMapping("delShops/{shopStr}")
     @RequiresPermissions("shop:shop:delete")
     @ResponseBody
-    public ResultUtil delUsers(@PathVariable(value = "shopStr") String shopStr) {
+    public ResultUtil delShops(@PathVariable(value = "shopStr") String shopStr) {
         try {
             shopServiceImpl.delShopsService(shopStr);
             return ResultUtil.ok();
@@ -133,7 +130,7 @@ public class ShopManagementController {
      */
     @RequestMapping("editShop/{id}")
     @RequiresPermissions("shop:shop:save")
-    public String editUser(@PathVariable(value = "id") String id, Model model) {
+    public String editShop(@PathVariable(value = "id") String id, Model model) {
         TbShops shop = shopServiceImpl.selShopByid(Integer.parseInt(id));
         model.addAttribute("shop", shop);
         return "page/shop/editShop";

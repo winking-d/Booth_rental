@@ -16,10 +16,10 @@ layui.config({
     $("#shopType").val(shopType);
     form.render("select");
 
-    $("#nickname").blur(function () {
+    $("#shopNumber").blur(function () {
         $.ajax({
             type: "get",
-            url: ctx + "/user/checkUserByNickname/" + $("#uid").val() + "&nickname=" + $("#nickname").val(),
+            url: ctx + "/shop/checkShopByNumber/" + $("#uid").val() + "&nickname=" + $("#nickname").val(),
             success: function (data) {
                 if (data.code != 0) {
                     top.layer.msg(data.msg);
@@ -65,7 +65,7 @@ layui.config({
             top.layer.close(index);
             top.layer.msg(msg);
             layer.closeAll("iframe");
-            //刷新父页面
+            // 刷新父页面
             parent.location.reload();
         }, 2000);
         return false;

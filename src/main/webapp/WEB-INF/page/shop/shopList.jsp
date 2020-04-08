@@ -6,9 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
-<%@taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
-<%@ include file="/WEB-INF/page/include/taglib.jsp"%>
+         pageEncoding="UTF-8" %>
+<%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
+<%@ include file="/WEB-INF/page/include/taglib.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -24,13 +24,18 @@
     <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
     <meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
     <meta name="format-detection" content="telephone=no">
-    <link rel="stylesheet" href="${ctx }/layui/css/layui.css" media="all" />
+    <link rel="stylesheet" href="${ctx }/layui/css/layui.css" media="all"/>
     <link rel="stylesheet" href="${ctx }/css/font_eolqem241z66flxr.css"
-          media="all" />
-    <link rel="stylesheet" href="${ctx }/css/list.css" media="all" />
-    <script>
+          media="all"/>
+    <link rel="stylesheet" href="${ctx }/css/list.css" media="all"/>
+    <script type="text/javascript">
         var ctx = "${ctx}";
     </script>
+    <style type="text/css">
+        .layui-btn{
+            padding: 0 14px;
+        }
+    </style>
 </head>
 <body class="childrenBody">
 <blockquote class="layui-elem-quote news_search">
@@ -41,7 +46,7 @@
                     <input type="text" id="shopNumber" name="shopNumber" value="" placeholder="请输入商铺号"
                            class="layui-input search_input">
                 </div>
-                <div class="layui-input-inline layui-form">
+                <div class="layui-input-inline layui-form" style="width: 240px">
                     <select name="shopType" id="shopType">
                         <option value="">请选择商铺类型</option>
                         <option value="01">服饰</option>
@@ -51,7 +56,7 @@
                         <option value="05">超市</option>
                     </select>
                 </div>
-                <div class="layui-input-inline layui-form">
+                <div class="layui-input-inline layui-form" style="width: 240px">
                     <select name="shopState" id="shopState">
                         <option value="">请选择商铺状态</option>
                         <option value="0">未出租</option>
@@ -70,11 +75,11 @@
                 <input type="text" id="shopSizeMax" class="layui-input userName"
                        name="shopSizeMax" placeholder="商铺面积(最高)" value="">
             </div>
-            <a class="layui-btn search_btn" lay-submit="" data-type="search"
-               lay-filter="search">查询</a>
+            <a class="layui-btn search_btn" lay-submit="" data-type="search" lay-filter="search">查询</a>
+            <button type="reset" class="layui-btn layui-btn-normal" style="margin: 0;">重置</button>
             <shiro:hasPermission name="shop:shop:save">
                 <div class="layui-inline">
-                    <a class="layui-btn layui-btn-normal shopAdd_btn">添加商铺</a>
+                    <a class="layui-btn layui-btn-warm shopAdd_btn">添加商铺</a>
                 </div>
             </shiro:hasPermission>
             <shiro:hasPermission name="shop:shop:delete">
@@ -82,7 +87,6 @@
                     <a class="layui-btn layui-btn-danger batchDel">批量删除</a>
                 </div>
             </shiro:hasPermission>
-<%--            <div class="layui-inline">（支持模糊查询）</div>--%>
         </div>
     </form>
 </blockquote>

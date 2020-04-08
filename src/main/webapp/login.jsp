@@ -22,7 +22,7 @@
 
 <div class="video_mask"></div>
 <div class="login">
-    <h1>管理员登录</h1>
+    <h1>登录</h1>
     <form class="layui-form" id="form">
         <div class="layui-form-item">
             <input class="layui-input" name="username" placeholder="用户名" value="admin" lay-verify="required" type="text" autocomplete="off">
