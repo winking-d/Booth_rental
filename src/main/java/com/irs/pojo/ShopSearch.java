@@ -3,7 +3,7 @@ package com.irs.pojo;
 public class ShopSearch {
     private String shopNumber;
     private String shopType;
-    private String shopSate;
+    private String shopState;
     private String shopSizeMin;
     private String shopSizeMax;
 
@@ -23,12 +23,12 @@ public class ShopSearch {
         this.shopType = shopType;
     }
 
-    public String getShopSate() {
-        return shopSate;
+    public String getShopState() {
+        return shopState;
     }
 
-    public void setShopSate(String shopSate) {
-        this.shopSate = shopSate;
+    public void setShopState(String shopState) {
+        this.shopState = shopState;
     }
 
     public String getShopSizeMin() {

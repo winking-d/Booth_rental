@@ -53,6 +53,7 @@
 		<table schema="" tableName="tb_users"></table> -->
 
 <!--		<table schema="" tableName="tb_shops"></table>-->
-		<table schema="" tableName="tb_orders"></table>
+<!--		<table schema="" tableName="tb_orders"></table>-->
+		<table schema="" tableName="tb_apply"></table>
 	</context>
 </generatorConfiguration>

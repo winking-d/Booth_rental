@@ -73,8 +73,8 @@ public class ShopServiceImpl implements ShopService {
         if (search.getShopType() != null && !"".equals(search.getShopType())) {
             criteria.andShopTypeEqualTo(search.getShopType());
         }
-        if (search.getShopSate() != null && !"".equals(search.getShopSate())) {
-            criteria.andShopStateEqualTo(search.getShopSate());
+        if (search.getShopState() != null && !"".equals(search.getShopState())) {
+            criteria.andShopStateEqualTo(search.getShopState());
         }
         if (search.getShopSizeMin() != null && !"".equals(search.getShopSizeMin())) {
             sizeMin = Double.parseDouble(search.getShopSizeMin());
