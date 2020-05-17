@@ -27,4 +27,6 @@ public interface TbShopsMapper {
     int updateByPrimaryKeySelective(TbShops record);
 
     int updateByPrimaryKey(TbShops record);
+
+    int updateState(TbShops shop);
 }

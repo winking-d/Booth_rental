@@ -77,7 +77,7 @@ public class UserServiceImpl implements UserService {
 		PageHelper.startPage(page, limit);
 		TbUsersExample example=new TbUsersExample();
 		//设置按创建时间降序排序
-		example.setOrderByClause("create_time DESC");
+		example.setOrderByClause("create_time ASC");
 		Criteria criteria = example.createCriteria();
 		
 		if(search.getNickname()!=null&&!"".equals(search.getNickname())){

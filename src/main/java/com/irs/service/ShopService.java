@@ -59,4 +59,11 @@ public interface ShopService {
      * @param shop
      */
     public void updShopService(TbShops shop);
+
+    /**
+     * 命名商铺
+     *
+     * @param shop
+     */
+    public void updateShopName(TbShops shop);
 }

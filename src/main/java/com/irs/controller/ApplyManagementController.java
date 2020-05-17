@@ -1,6 +1,7 @@
 package com.irs.controller;
 
 import com.irs.annotation.SysLog;
+import com.irs.pojo.ApplySearch;
 import com.irs.service.ApplyService;
 import com.irs.util.ResultUtil;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -9,8 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.Map;
 
 @Controller
 @RequestMapping("apply/")
@@ -35,6 +34,7 @@ public class ApplyManagementController {
     public String applyListStaff() {
         return "page/apply/applyListStaff";
     }
+
     /**
      * 申请商铺
      *
@@ -47,8 +47,12 @@ public class ApplyManagementController {
     @ResponseBody
     public ResultUtil applyShopByid(@PathVariable(value = "id") String id) {
         try {
-            applyServiceImpl.apply(id);
-            return ResultUtil.ok();
+            if (applyServiceImpl.isRepeat(id)) {
+                return ResultUtil.repeat();
+            } else {
+                applyServiceImpl.apply(id);
+                return ResultUtil.ok();
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return ResultUtil.error();
@@ -69,7 +73,37 @@ public class ApplyManagementController {
         return applyServiceImpl.selapplysByUser(page, limit);
     }
 
-    public ResultUtil getApplyListStaff(Integer page, Integer limit, Map<String,Object> search){
-        return applyServiceImpl.selApplies(page, limit,search);
+    /**
+     * 获取申请列表
+     *
+     * @param page
+     * @param limit
+     * @param search
+     * @return
+     */
+    @RequestMapping("getApplies")
+    @RequiresPermissions("apply:apply:applyList")
+    @ResponseBody
+    public ResultUtil getApplyListStaff(Integer page, Integer limit, ApplySearch search) {
+        return applyServiceImpl.selApplies(page, limit, search);
+    }
+
+    /**
+     * 通过该申请
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping("passApply/{id}")
+    @RequiresPermissions("apply:apply:passApply")
+    @ResponseBody
+    public ResultUtil passApply(@PathVariable(value = "id") String id) {
+        try {
+             applyServiceImpl.passApply(id);
+            return ResultUtil.ok();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResultUtil.error();
+        }
     }
 }

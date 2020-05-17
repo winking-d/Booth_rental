@@ -66,34 +66,34 @@ layui.config({
 		function(data){
 			$(".userTotal").text(data.length);
 		}
-	)
+	);
 	
 	//今日评论数
 	$.get(ctx+"/main/getUsersToday",
 			function(data){
 		$(".usersToday").text(data.length);
 	}
-	)
-	
+	);
+
 	//今日评论数
 	$.get(ctx+"/main/getUsersYearWeek",
 			function(data){
 		$(".usersYearWeek").text(data.length);
 	}
-	)
+	);
 	//今日评论数
 	$.get(ctx+"/main/getUsersYestoday",
 			function(data){
 		$(".usersYestoday").text(data.length);
 	}
-	)
-	
+	);
+
 	//今日评论数
 	$.get(ctx+"/main/getUsersMonth",
 			function(data){
 		$(".usersMonth").text(data.length);
 	}
-	)
+	);
 	
 	//系统基本参数
 	if(window.sessionStorage.getItem("systemParameter")){
@@ -120,12 +120,6 @@ layui.config({
  				return data;
  			}
  		}
- 		$(".version").text(nullData(data.version));      //当前版本
-		$(".author").text(nullData(data.author));        //开发作者
-		$(".homePage").text(nullData(data.homePage));    //网站首页
-		$(".server").text(nullData(data.server));        //服务器环境
-		$(".dataBase").text(nullData(data.dataBase));    //数据库版本
-		$(".maxUpload").text(nullData(data.maxUpload));    //最大上传限制
  	}
 
 })

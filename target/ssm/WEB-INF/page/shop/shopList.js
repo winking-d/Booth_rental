@@ -106,7 +106,7 @@ layui.config({base: "js/"}).use(
                 },
                 {
                     field: 'shopRent',
-                    title: '租金（元/月）'
+                    title: '租金（万元/年）'
                 },
                 // {
                 //     field : 'createTime',

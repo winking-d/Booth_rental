@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.irs.mapper.ApplyMapper">
+    <update id="closeApplies">
+        update tb_apply
+        set state = '2'
+        where shopID = #{shopId} and id != #{id}
+    </update>
+    <select id="selApplyCount" resultType="Integer">
+        SELECT COUNT(id) FROM tb_apply WHERE state = '0'
+    </select>
+    <select id="selOrderingCount" resultType="Integer">
+        SELECT COUNT(uuid) FROM tb_orders WHERE order_state = '0'
+    </select>
+    <select id="selOrderedCount" resultType="Integer">
+        SELECT COUNT(uuid) FROM tb_orders WHERE order_state = '1'
+    </select>
+    <select id="selIncome" resultType="Integer">
+        SELECT SUM(pay_rent) FROM tb_orders
+    </select>
+    <select id="selTypeCount1" resultType="Map">
+        SELECT type.shop_type type,COUNT(shop.id) count
+        FROM
+        (SELECT DISTINCT shop_type FROM tb_shops)as type
+        LEFT JOIN tb_shops as shop ON type.shop_type = shop.shop_type
+        GROUP BY type.shop_type
+    </select>
+    <select id="selTypeCount2" resultType="Map">
+        SELECT type2.type type,Count(apply.id) count
+        FROM
+        (SELECT type.shop_type type,shop.id id
+        FROM
+        (SELECT DISTINCT shop_type FROM tb_shops)as type
+        LEFT JOIN tb_shops as shop ON type.shop_type = shop.shop_type) as type2
+        LEFT JOIN tb_apply as apply ON type2.id = apply.shopID
+        GROUP BY type2.type
+    </select>
+    <select id="selTypeCount3" resultType="Map">
+        SELECT type2.type type,COUNT(orders.uuid) count,SUM(orders.pay_rent) sum
+        FROM
+        (SELECT type.shop_type type,shop.id id
+        FROM
+        (SELECT DISTINCT shop_type FROM tb_shops)as type
+        LEFT JOIN tb_shops as shop ON type.shop_type = shop.shop_type) as type2
+        LEFT JOIN tb_orders orders ON type2.id = orders.shop_id
+        GROUP BY type2.type
+    </select>
+
+</mapper>

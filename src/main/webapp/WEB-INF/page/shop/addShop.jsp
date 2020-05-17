@@ -72,7 +72,7 @@
         <label class="layui-form-label">商铺租金</label>
         <div class="layui-input-block">
             <input type="text" id="shopRent" name="shopRent" class="layui-input userName"
-                   lay-verify="required|number" placeholder="请输入商铺租金（￥/月）" value="">
+                   lay-verify="required|number" placeholder="请输入商铺租金（万元/年）" value="">
         </div>
     </div>
     <div class="layui-form-item">

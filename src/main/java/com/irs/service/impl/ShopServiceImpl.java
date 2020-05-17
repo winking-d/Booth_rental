@@ -64,7 +64,7 @@ public class ShopServiceImpl implements ShopService {
         PageHelper.startPage(page, limit);
         TbShopsExample example = new TbShopsExample();
         //按商铺号排序=
-        example.setOrderByClause("shop_number DESC");
+        example.setOrderByClause("shop_number ASC");
         TbShopsExample.Criteria criteria = example.createCriteria();
 
         if (search.getShopNumber() != null && !"".equals(search.getShopNumber())) {
@@ -137,6 +137,16 @@ public class ShopServiceImpl implements ShopService {
     @Override
     public void updShopService(TbShops shop) {
         tbShopsMapper.updateByPrimaryKey(shop);
+    }
+
+    /**
+     * 命名商铺
+     *
+     * @param shop
+     */
+    @Override
+    public void updateShopName(TbShops shop) {
+        tbShopsMapper.updateByPrimaryKeySelective(shop);
     }
 
 }

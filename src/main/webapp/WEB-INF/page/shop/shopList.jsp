@@ -31,11 +31,6 @@
     <script type="text/javascript">
         var ctx = "${ctx}";
     </script>
-    <style type="text/css">
-        .layui-btn{
-            padding: 0 14px;
-        }
-    </style>
 </head>
 <body class="childrenBody">
 <blockquote class="layui-elem-quote news_search">
@@ -52,7 +47,7 @@
                         <option value="01">服饰</option>
                         <option value="02">餐饮</option>
                         <option value="03">影院</option>
-                        <option value="04">KTV</option>
+                        <option value="04">电玩</option>
                         <option value="05">超市</option>
                     </select>
                 </div>
@@ -66,14 +61,16 @@
             </div>
         </div>
         <div style="margin-top: 1%">
-            <div class="layui-inline">
+            <div class="layui-inline" style="width: 166.6px;">
                 <input type="text" id="shopSizeMin"
                        class="layui-input userName" name="shopSizeMin"
                        placeholder="商铺面积(最低)" value="">
             </div>
-            <div class="layui-inline">
-                <input type="text" id="shopSizeMax" class="layui-input userName"
-                       name="shopSizeMax" placeholder="商铺面积(最高)" value="">
+            <div class="layui-inline">-</div>
+            <div class="layui-inline" style="width: 166.6px;">
+                <input type="text" id="shopSizeMax"
+                       class="layui-input userName" name="shopSizeMax"
+                       placeholder="商铺面积(最高)" value="">
             </div>
             <a class="layui-btn search_btn" lay-submit="" data-type="search" lay-filter="search">查询</a>
             <button type="reset" class="layui-btn layui-btn-normal" style="margin: 0;">重置</button>
@@ -110,7 +107,7 @@
     {{#  } else if(d.shopType === '03'){ }}
     影院
     {{#  } else if(d.shopType === '04'){ }}
-    KTV
+    电玩
     {{#  } else if(d.shopType === '05'){ }}
     超市
     {{#  } }}

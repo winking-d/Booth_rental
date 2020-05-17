@@ -45,6 +45,7 @@
             </div>
             <div class="layui-input-inline layui-form">
                 <select name="applyState" id="applyState">
+                    <option value="" selected>申请状态</option>
                     <option value="0">申请中</option>
                     <option value="1">申请成功</option>
                     <option value="2">申请失败</option>

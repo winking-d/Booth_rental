@@ -1,243 +1,251 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.irs.mapper.TbShopsMapper">
-  <resultMap id="BaseResultMap" type="com.irs.pojo.TbShops">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="shop_number" jdbcType="INTEGER" property="shopNumber" />
-    <result column="shop_name" jdbcType="VARCHAR" property="shopName" />
-    <result column="shop_size" jdbcType="DOUBLE" property="shopSize" />
-    <result column="shop_type" jdbcType="VARCHAR" property="shopType" />
-    <result column="shop_state" jdbcType="VARCHAR" property="shopState" />
-    <result column="shop_rent" jdbcType="VARCHAR" property="shopRent" />
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+    <resultMap id="BaseResultMap" type="com.irs.pojo.TbShops">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="shop_number" jdbcType="INTEGER" property="shopNumber"/>
+        <result column="shop_name" jdbcType="VARCHAR" property="shopName"/>
+        <result column="shop_size" jdbcType="DOUBLE" property="shopSize"/>
+        <result column="shop_type" jdbcType="VARCHAR" property="shopType"/>
+        <result column="shop_state" jdbcType="VARCHAR" property="shopState"/>
+        <result column="shop_rent" jdbcType="VARCHAR" property="shopRent"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        id, shop_number, shop_name, shop_size, shop_type, shop_state, shop_rent
+    </sql>
+    <select id="selectByExample" parameterType="com.irs.pojo.TbShopsExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
         </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
-    id, shop_number, shop_name, shop_size, shop_type, shop_state, shop_rent
-  </sql>
-  <select id="selectByExample" parameterType="com.irs.pojo.TbShopsExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from tb_shops
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from tb_shops
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from tb_shops
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.irs.pojo.TbShopsExample">
-    delete from tb_shops
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.irs.pojo.TbShops">
-    insert into tb_shops (id, shop_number, shop_name, 
-      shop_size, shop_type, shop_state, 
-      shop_rent)
-    values (#{id,jdbcType=INTEGER}, #{shopNumber,jdbcType=INTEGER}, #{shopName,jdbcType=VARCHAR}, 
-      #{shopSize,jdbcType=DOUBLE}, #{shopType,jdbcType=VARCHAR}, #{shopState,jdbcType=VARCHAR}, 
-      #{shopRent,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.irs.pojo.TbShops">
-    insert into tb_shops
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="shopNumber != null">
-        shop_number,
-      </if>
-      <if test="shopName != null">
-        shop_name,
-      </if>
-      <if test="shopSize != null">
-        shop_size,
-      </if>
-      <if test="shopType != null">
-        shop_type,
-      </if>
-      <if test="shopState != null">
-        shop_state,
-      </if>
-      <if test="shopRent != null">
-        shop_rent,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="shopNumber != null">
-        #{shopNumber,jdbcType=INTEGER},
-      </if>
-      <if test="shopName != null">
-        #{shopName,jdbcType=VARCHAR},
-      </if>
-      <if test="shopSize != null">
-        #{shopSize,jdbcType=DOUBLE},
-      </if>
-      <if test="shopType != null">
-        #{shopType,jdbcType=VARCHAR},
-      </if>
-      <if test="shopState != null">
-        #{shopState,jdbcType=VARCHAR},
-      </if>
-      <if test="shopRent != null">
-        #{shopRent,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.irs.pojo.TbShopsExample" resultType="java.lang.Long">
-    select count(*) from tb_shops
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update tb_shops
-    <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
-      </if>
-      <if test="record.shopNumber != null">
+        <include refid="Base_Column_List"/>
+        from tb_shops
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_shops
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from tb_shops
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.irs.pojo.TbShopsExample">
+        delete from tb_shops
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.irs.pojo.TbShops">
+        insert into tb_shops (id, shop_number, shop_name,
+        shop_size, shop_type, shop_state,
+        shop_rent)
+        values (#{id,jdbcType=INTEGER}, #{shopNumber,jdbcType=INTEGER}, #{shopName,jdbcType=VARCHAR},
+        #{shopSize,jdbcType=DOUBLE}, #{shopType,jdbcType=VARCHAR}, #{shopState,jdbcType=VARCHAR},
+        #{shopRent,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.irs.pojo.TbShops">
+        insert into tb_shops
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="shopNumber != null">
+                shop_number,
+            </if>
+            <if test="shopName != null">
+                shop_name,
+            </if>
+            <if test="shopSize != null">
+                shop_size,
+            </if>
+            <if test="shopType != null">
+                shop_type,
+            </if>
+            <if test="shopState != null">
+                shop_state,
+            </if>
+            <if test="shopRent != null">
+                shop_rent,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="shopNumber != null">
+                #{shopNumber,jdbcType=INTEGER},
+            </if>
+            <if test="shopName != null">
+                #{shopName,jdbcType=VARCHAR},
+            </if>
+            <if test="shopSize != null">
+                #{shopSize,jdbcType=DOUBLE},
+            </if>
+            <if test="shopType != null">
+                #{shopType,jdbcType=VARCHAR},
+            </if>
+            <if test="shopState != null">
+                #{shopState,jdbcType=VARCHAR},
+            </if>
+            <if test="shopRent != null">
+                #{shopRent,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.irs.pojo.TbShopsExample" resultType="java.lang.Long">
+        select count(*) from tb_shops
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update tb_shops
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.shopNumber != null">
+                shop_number = #{record.shopNumber,jdbcType=INTEGER},
+            </if>
+            <if test="record.shopName != null">
+                shop_name = #{record.shopName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.shopSize != null">
+                shop_size = #{record.shopSize,jdbcType=DOUBLE},
+            </if>
+            <if test="record.shopType != null">
+                shop_type = #{record.shopType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.shopState != null">
+                shop_state = #{record.shopState,jdbcType=VARCHAR},
+            </if>
+            <if test="record.shopRent != null">
+                shop_rent = #{record.shopRent,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update tb_shops
+        set id = #{record.id,jdbcType=INTEGER},
         shop_number = #{record.shopNumber,jdbcType=INTEGER},
-      </if>
-      <if test="record.shopName != null">
         shop_name = #{record.shopName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.shopSize != null">
         shop_size = #{record.shopSize,jdbcType=DOUBLE},
-      </if>
-      <if test="record.shopType != null">
         shop_type = #{record.shopType,jdbcType=VARCHAR},
-      </if>
-      <if test="record.shopState != null">
         shop_state = #{record.shopState,jdbcType=VARCHAR},
-      </if>
-      <if test="record.shopRent != null">
-        shop_rent = #{record.shopRent,jdbcType=VARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update tb_shops
-    set id = #{record.id,jdbcType=INTEGER},
-      shop_number = #{record.shopNumber,jdbcType=INTEGER},
-      shop_name = #{record.shopName,jdbcType=VARCHAR},
-      shop_size = #{record.shopSize,jdbcType=DOUBLE},
-      shop_type = #{record.shopType,jdbcType=VARCHAR},
-      shop_state = #{record.shopState,jdbcType=VARCHAR},
-      shop_rent = #{record.shopRent,jdbcType=VARCHAR}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.irs.pojo.TbShops">
-    update tb_shops
-    <set>
-      <if test="shopNumber != null">
-        shop_number = #{shopNumber,jdbcType=INTEGER},
-      </if>
-      <if test="shopName != null">
+        shop_rent = #{record.shopRent,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.irs.pojo.TbShops">
+        update tb_shops
+        <set>
+            <if test="shopNumber != null">
+                shop_number = #{shopNumber,jdbcType=INTEGER},
+            </if>
+            <if test="shopName != null">
+                shop_name = #{shopName,jdbcType=VARCHAR},
+            </if>
+            <if test="shopSize != null">
+                shop_size = #{shopSize,jdbcType=DOUBLE},
+            </if>
+            <if test="shopType != null">
+                shop_type = #{shopType,jdbcType=VARCHAR},
+            </if>
+            <if test="shopState != null">
+                shop_state = #{shopState,jdbcType=VARCHAR},
+            </if>
+            <if test="shopRent != null">
+                shop_rent = #{shopRent,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.irs.pojo.TbShops">
+        update tb_shops
+        set shop_number = #{shopNumber,jdbcType=INTEGER},
         shop_name = #{shopName,jdbcType=VARCHAR},
-      </if>
-      <if test="shopSize != null">
         shop_size = #{shopSize,jdbcType=DOUBLE},
-      </if>
-      <if test="shopType != null">
         shop_type = #{shopType,jdbcType=VARCHAR},
-      </if>
-      <if test="shopState != null">
         shop_state = #{shopState,jdbcType=VARCHAR},
-      </if>
-      <if test="shopRent != null">
-        shop_rent = #{shopRent,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.irs.pojo.TbShops">
-    update tb_shops
-    set shop_number = #{shopNumber,jdbcType=INTEGER},
-      shop_name = #{shopName,jdbcType=VARCHAR},
-      shop_size = #{shopSize,jdbcType=DOUBLE},
-      shop_type = #{shopType,jdbcType=VARCHAR},
-      shop_state = #{shopState,jdbcType=VARCHAR},
-      shop_rent = #{shopRent,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+        shop_rent = #{shopRent,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateState" parameterType="com.irs.pojo.TbShops">
+        update tb_shops
+        set shop_name = NULL,
+        shop_state = #{shopState,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
 </mapper>

@@ -96,7 +96,9 @@ layui.config({base: "js/"}).use(
         //监听工具条
         table.on('tool(shopList)', function (obj) {
             var data = obj.data;
-            if (obj.event === 'apply') {
+            if (data.shopState === '1') {
+                layer.msg("此商铺已出组，不可申请！");
+            } else if (obj.event === 'apply') {
                 layer.confirm('确认申请此商铺吗？', function (index) {
                     $.ajax({
                         url: ctx + '/apply/apply/' + data.id,
@@ -106,6 +108,8 @@ layui.config({base: "js/"}).use(
                                 layer.msg("申请成功！请等待工作人员审批", {
                                     icon: 6
                                 });
+                            } else if (d.code == 200) {
+                                layer.msg("您已申请过此商铺，请不要重复申请！");
                             } else {
                                 layer.msg("权限不足！", {
                                     icon: 5

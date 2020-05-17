@@ -1,7 +1,9 @@
 package com.irs.service;
 
+import com.irs.pojo.ApplySearch;
 import com.irs.util.ResultUtil;
 
+import java.util.List;
 import java.util.Map;
 
 public interface ApplyService {
@@ -29,5 +31,35 @@ public interface ApplyService {
      * @param search
      * @return
      */
-    public ResultUtil selApplies(Integer page, Integer limit, Map<String, Object> search);
+    public ResultUtil selApplies(Integer page, Integer limit, ApplySearch search);
+
+    /**
+     * 判断是否已申请过该商铺
+     *
+     * @param id
+     * @return
+     */
+    public boolean isRepeat(String id);
+
+    /**
+     * 审批通过该申请
+     *
+     * @param id
+     * @return
+     */
+    public boolean passApply(String id);
+
+    /**
+     * 统计信息
+     *
+     * @return
+     */
+    public Map<String, Integer> infoStatis();
+
+    /**
+     * 展示数据
+     *
+     * @return
+     */
+    public Map<String, Object> dataShow();
 }

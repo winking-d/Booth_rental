@@ -9,7 +9,7 @@ layui.config({base: "js/"}).use(
         active = {
             search: function () {
                 var shopNumber = $('#shopNumber'),
-                    userName = $('#userName')
+                    userName = $('#userName'),
                     applyState = $('#applyState option:selected');
                 //执行重载
                 table.reload(
@@ -82,16 +82,21 @@ layui.config({base: "js/"}).use(
         //监听工具条
         table.on('tool(applyList)', function (obj) {
             var data = obj.data;
+            if (data.state !=="0"){
+                layer.msg("请操作处于“申请中”状态的数据！");
+                return;
+            }
             if (obj.event === 'adopt') {
                 layer.confirm('此操作将自动拒绝此商铺的其他申请，确认租户已缴纳租金并通过此申请吗？', function (index) {
                     $.ajax({
-                        url: ctx + '/apply/apply/' + data.id,
+                        url: ctx + '/apply/passApply/' + data.id,
                         type: "post",
                         success: function (d) {
                             if (d.code == 0) {
                                 layer.msg("通过成功！已生成相应订单", {
                                     icon: 6
                                 });
+                                $(".search_btn").click();
                             } else {
                                 layer.msg("权限不足！", {
                                     icon: 5

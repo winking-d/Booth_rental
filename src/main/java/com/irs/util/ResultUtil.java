@@ -59,7 +59,11 @@ public class ResultUtil implements Serializable {
 	public static ResultUtil ok(){
 		return new ResultUtil(0);
 	}
-	
+
+	public static ResultUtil repeat(){
+		return new ResultUtil(200);
+	}
+
 	public static ResultUtil ok(Object list){
 		ResultUtil result = new ResultUtil();
 		result.setCode(0);
